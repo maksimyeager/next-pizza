@@ -53,7 +53,6 @@ export async function POST(req: NextRequest) {
                 "Next Pizza / Ваш заказ успешно оформлен 🎉",
                 OrderCancelledTemplate({
                     orderId: order.id,
-                    items: items,
                 })
             );
         }
