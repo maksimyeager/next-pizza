@@ -24,7 +24,6 @@ export const CartDrawerItem: React.FC<Props> = ({
     onClickRemove,
     className,
 }) => {
-    console.log(disabled);
     return (
         <div
             className={cn(

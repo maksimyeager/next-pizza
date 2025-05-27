@@ -1,3 +1,4 @@
+export { AddressInput } from "./address-input";
 export { CartButton } from "./cart-button";
 export { CartDrawer } from "./cart-drawer";
 export { CartDrawerItem } from "./cart-drawer-item";
@@ -30,6 +31,7 @@ export { SortPopup } from "./sort-popup";
 export { Title } from "./title";
 export { TopBar } from "./top-bar";
 export { WhiteBlock } from "./white-block";
+export * from "./email-templates";
 export * from "./checkout";
 export * from "./form";
 export * from "./modals";
