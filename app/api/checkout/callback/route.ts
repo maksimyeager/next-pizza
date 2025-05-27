@@ -1,11 +1,10 @@
 import { PaymentCallbackData } from "@/@types/yookassa";
-import { OrderSuccessTemplate, OrderCancelledTemplate } from "@/components";
+import { OrderCancelledTemplate, OrderSuccessTemplate } from "@/components";
 import { sendEmail } from "@/lib";
 import { prisma } from "@/prisma/prisma-client";
 import { CartItemDTO } from "@/services/dto/cart.dto";
 import { OrderStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { ReactNode } from "react";
 
 export async function POST(req: NextRequest) {
     try {
@@ -22,8 +21,6 @@ export async function POST(req: NextRequest) {
         }
 
         const isSucceeded = body.object.status === "succeeded";
-
-        const jsx = isSucceeded ? OrderSuccessTemplate : "";
 
         await prisma.order.update({
             where: {

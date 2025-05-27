@@ -31,7 +31,7 @@ export const Header: React.FC<Props> = ({
                 );
             }, 500);
         }
-    }, []);
+    }, [searchParams]);
 
     return (
         <header className={cn("border-b", className)}>

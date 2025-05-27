@@ -2,17 +2,12 @@
 
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckoutSidebar, Container, Title } from "@/components/";
-import {
-    CheckoutAddressForm,
-    CheckoutCart,
-    CheckoutPersonalForm,
-} from "@/components/";
 import { useCart } from "@/hooks";
 import { checkoutFormSchema, CheckoutFormValues } from "@/constants";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { CheckoutAddressForm, CheckoutCart, CheckoutPersonalForm, CheckoutSidebar, Container, Title } from "@/components";
 
 export default function Checkout() {
     const [submitting, setSubmitting] = useState(false);

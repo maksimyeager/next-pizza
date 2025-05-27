@@ -5,8 +5,7 @@ import { prisma } from "@/prisma/prisma-client";
 import { OrderStatus } from "@prisma/client";
 import { cookies } from "next/headers";
 import { createPayment, sendEmail } from "@/lib";
-import { PayOrderTemplate } from "@/components/";
-import { ReactNode } from "react";
+import { PayOrderTemplate } from "@/components";
 
 export async function createOrder(data: CheckoutFormValues) {
     try {
@@ -104,7 +103,7 @@ export async function createOrder(data: CheckoutFormValues) {
                 orderId: order.id,
                 totalAmount: order.totalAmount,
                 paymentUrl: paymentUrl,
-            }) 
+            })
         );
 
         return paymentUrl;
