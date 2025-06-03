@@ -14,8 +14,8 @@ model User {
     email    String @unique
     password String
 
-    verified DateTime
-    role     UserRole @default(USER)
+    verified DateTime?
+    role     UserRole  @default(USER)
 
     provider   String?
     providerId String?

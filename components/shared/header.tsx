@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { CartButton, Container, SearchInput } from "./";
-import { Button } from "../ui";
-import { User } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import {
+    AuthModal,
+    CartButton,
+    Container,
+    ProfileButton,
+    SearchInput,
+} from "./";
+import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 
 interface Props {
@@ -22,6 +26,8 @@ export const Header: React.FC<Props> = ({
     className,
 }) => {
     const searchParams = useSearchParams();
+
+    const [openAuthModal, setOpenAuthModal] = useState(false);
 
     useEffect(() => {
         if (searchParams.has("paid")) {
@@ -65,13 +71,14 @@ export const Header: React.FC<Props> = ({
 
                 {/* Правая часть */}
                 <div className="flex items-center gap-3">
-                    <Button
-                        variant="outline"
-                        className="flex items-center gap-1"
-                    >
-                        <User size={16} />
-                        Войти
-                    </Button>
+                    <ProfileButton
+                        onClickSignIn={() => setOpenAuthModal(true)}
+                    />
+
+                    <AuthModal
+                        open={openAuthModal}
+                        onClose={() => setOpenAuthModal(false)}
+                    />
 
                     {hasCart && <CartButton />}
                 </div>

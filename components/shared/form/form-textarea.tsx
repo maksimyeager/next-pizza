@@ -2,7 +2,8 @@
 
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { Textarea, ClearButton, RequiredSymbol, ErrorText } from "../../";
+import { ClearButton, RequiredSymbol, ErrorText } from "@/components/shared";
+import { Textarea } from "@/components/ui";
 
 interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     className?: string;
@@ -43,7 +44,6 @@ export const FormTextarea: React.FC<Props> = ({
                     className="h-12 text-md"
                     {...register(name)}
                     {...props}
-                    
                 />
 
                 {value && <ClearButton onClick={onClickClear} />}

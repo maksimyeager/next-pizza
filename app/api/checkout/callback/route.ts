@@ -1,5 +1,8 @@
 import { PaymentCallbackData } from "@/@types/yookassa";
-import { OrderCancelledTemplate, OrderSuccessTemplate } from "@/components";
+import {
+    OrderCancelledTemplate,
+    OrderSuccessTemplate,
+} from "@/components/shared";
 import { sendEmail } from "@/lib";
 import { prisma } from "@/prisma/prisma-client";
 import { CartItemDTO } from "@/services/dto/cart.dto";
@@ -38,8 +41,8 @@ export async function POST(req: NextRequest) {
         if (isSucceeded) {
             await sendEmail(
                 order.email,
-                "Next Pizza / Ваш заказ успешно оформлен 🎉",
-                OrderSuccessTemplate({
+                "Next Pizza / Ваш заказ успешно оплачен 🎉",
+                await OrderSuccessTemplate({
                     orderId: order.id,
                     items: items,
                 })
@@ -47,8 +50,8 @@ export async function POST(req: NextRequest) {
         } else {
             await sendEmail(
                 order.email,
-                "Next Pizza / Ваш заказ успешно оформлен 🎉",
-                OrderCancelledTemplate({
+                "Next Pizza /К сожалению, ваш заказ отменён 😕",
+                await OrderCancelledTemplate({
                     orderId: order.id,
                 })
             );

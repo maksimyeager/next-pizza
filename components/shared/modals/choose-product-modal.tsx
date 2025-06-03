@@ -3,8 +3,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ProductWithRelations } from "@/@types/prisma";
 import { ProductForm } from "..";
 
@@ -24,10 +23,6 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
                     className
                 )}
             >
-                <VisuallyHidden>
-                    <DialogTitle></DialogTitle>
-                </VisuallyHidden>
-
                 <ProductForm product={product} onSubmit={() => router.back()} />
             </DialogContent>
         </Dialog>
