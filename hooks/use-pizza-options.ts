@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { useSet } from "react-use";
 import { ProductVariation } from "@prisma/client";

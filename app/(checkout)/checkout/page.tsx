@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "@/hooks";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,23 +15,41 @@ import {
     Container,
     Title,
 } from "@/components/shared";
+import { useSession } from "next-auth/react";
+import { Api } from "@/services/api-client";
 
 export default function Checkout() {
+    const { data: session } = useSession();
     const [submitting, setSubmitting] = useState(false);
     const { totalAmount, items, updateItemQuantity, removeCartItem, loading } =
         useCart();
 
     const form = useForm<CheckoutFormValues>({
-        resolver: zodResolver(checkoutFormSchema),
-        defaultValues: {
-            email: "",
-            firstName: "",
-            lastName: "",
-            phone: "",
-            address: "",
-            comment: "",
-        },
+        // resolver: zodResolver(checkoutFormSchema),
+        // defaultValues: {
+        //     email: "",
+        //     firstName: "",
+        //     lastName: "",
+        //     phone: "",
+        //     address: "",
+        //     comment: "",
+        // },
     });
+
+    useEffect(() => {
+        async function fetchUserInfo() {
+            const data = await Api.auth.getMe();
+            const [firstName, lastName] = data.fullName.split(" ");
+
+            form.setValue("firstName", firstName);
+            form.setValue("lastName", lastName);
+            form.setValue("email", data.email);
+        }
+
+        if (session) {
+            fetchUserInfo();
+        }
+    }, [session]);
 
     const onSubmit = async (data: CheckoutFormValues) => {
         setSubmitting(true);

@@ -14,7 +14,7 @@ export type CartItemDTO = CartItem & {
 };
 
 export interface CartDTO extends Cart {
-    quantity: any;
+    quantity: number;
     items: CartItemDTO[];
 }
 

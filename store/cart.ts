@@ -23,7 +23,7 @@ export interface CartState {
     removeCartItem: (id: number) => Promise<void>;
 }
 
-export const useCartStore = create<CartState>((set, get) => ({
+export const useCartStore = create<CartState>((set) => ({
     items: [],
     error: false,
     loading: true,

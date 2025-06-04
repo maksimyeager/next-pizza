@@ -10,7 +10,7 @@ import {
     VerificationUserTemplate,
 } from "@/components/shared";
 import { getUserSession } from "@/lib/get-user-session";
-import { hashSync } from "bcrypt";
+import { hashSync } from "bcryptjs";
 
 export async function createOrder(data: CheckoutFormValues) {
     try {

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
     AuthModal,
     CartButton,
@@ -25,17 +25,30 @@ export const Header: React.FC<Props> = ({
     hasSearch = true,
     className,
 }) => {
+    const router = useRouter();
     const searchParams = useSearchParams();
 
     const [openAuthModal, setOpenAuthModal] = useState(false);
 
     useEffect(() => {
+        let toastMessage = "";
+
         if (searchParams.has("paid")) {
+            toastMessage =
+                "Заказ успешно оплачен! Информация отправлена на почту.";
+        }
+
+        if (searchParams.has("verified")) {
+            toastMessage = "Почта успешно подтверждена!";
+        }
+
+        if (toastMessage) {
             setTimeout(() => {
-                toast.success(
-                    "Заказ успешно оплачен! Информация отправлена на почту."
-                );
-            }, 500);
+                router.replace("/");
+                toast.success(toastMessage, {
+                    duration: 3000,
+                });
+            }, 1000);
         }
     }, [searchParams]);
 
